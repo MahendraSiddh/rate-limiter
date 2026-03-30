@@ -1,0 +1,14 @@
+{
+  "annotations": { "list": [] },
+  "description": "Adaptive Rate Limiter — Overview Dashboard",
+  "editable": true,
+  "id": null,
+  "title": "Rate Limiter Overview",
+  "uid": "rate-limiter-overview",
+  "version": 1,
+  "time": { "from": "now-1h", "to": "now" },
+  "timezone": "browser",
+  "panels": [],
+  "templating": { "list": [] },
+  "schemaVersion": 39
+}

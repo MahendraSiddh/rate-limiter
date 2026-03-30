@@ -1,0 +1,51 @@
+# Prometheus configuration for Adaptive Rate Limiter
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  scrape_timeout: 10s
+
+scrape_configs:
+  # Decision Engine (Go) metrics
+  - job_name: "decision-engine"
+    static_configs:
+      - targets: ["decision-engine:8080"]
+    metrics_path: /metrics
+
+  # ML Sidecar (Python) metrics
+  - job_name: "ml-sidecar"
+    static_configs:
+      - targets: ["ml-sidecar:8081"]
+    metrics_path: /metrics
+
+  # Nginx / OpenResty metrics
+  - job_name: "nginx"
+    static_configs:
+      - targets: ["nginx:80"]
+    metrics_path: /metrics
+
+  # Redis Cluster nodes
+  - job_name: "redis"
+    static_configs:
+      - targets:
+          - "redis-node-1:6379"
+          - "redis-node-2:6379"
+          - "redis-node-3:6379"
+          - "redis-node-4:6379"
+          - "redis-node-5:6379"
+          - "redis-node-6:6379"
+
+  # Kafka (via JMX exporter or similar)
+  - job_name: "kafka"
+    static_configs:
+      - targets: ["kafka:9092"]
+
+  # PostgreSQL (via postgres_exporter)
+  - job_name: "postgres"
+    static_configs:
+      - targets: ["postgres:5432"]
+
+  # Prometheus self-monitoring
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
