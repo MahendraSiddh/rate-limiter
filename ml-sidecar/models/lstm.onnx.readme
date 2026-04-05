@@ -1,0 +1,20 @@
+# ONNX model placeholder — replace with a real trained LSTM model export.
+#
+# How to export your Keras/PyTorch LSTM to ONNX:
+#
+#   # Keras
+#   import tf2onnx, tensorflow as tf
+#   model = tf.keras.models.load_model("lstm_model.h5")
+#   tf2onnx.convert.from_keras(model, output_path="models/lstm.onnx",
+#       opset=17, input_signature=[tf.TensorSpec([1,20,9], tf.float32, name="input")])
+#
+#   # PyTorch
+#   import torch
+#   dummy = torch.zeros(1, 20, 9)
+#   torch.onnx.export(model, dummy, "models/lstm.onnx",
+#       input_names=["input"], output_names=["output"],
+#       dynamic_axes={"input": {0: "batch_size"}}, opset_version=17)
+#
+# The ONNX model must have:
+#   input  name="input"   shape=[1, 20, 9]  dtype=float32
+#   output name="output"  shape=[1, 1]      dtype=float32  (anomaly prob in [0,1])
